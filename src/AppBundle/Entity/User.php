@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,8 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
-class User
+class User extends BaseUser
 {
     /**
      * @var int
@@ -19,14 +21,7 @@ class User
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="username", type="string", length=255, unique=true)
-     */
-    private $username;
+    protected $id;
 
     /**
      * @var string
@@ -38,56 +33,39 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="surname", type="string", length=255, nullable=true)
+     * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
      */
-    private $surname;
+    private $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, unique=true)
-     */
-    private $email;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
-     */
-    private $password;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="profil_picture", type="string", length=255)
+     * @ORM\Column(name="profil_picture", type="string", length=255, nullable=true)
      */
     private $profilPicture;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="creation_at", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
-    private $creationAt;
+    private $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
      * @var array
      *
-     * @ORM\Column(name="statut", type="array")
+     * @ORM\Column(name="statut", type="array", nullable=true))
      */
     private $statut;
 
-
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -95,28 +73,18 @@ class User
         return $this->id;
     }
 
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return User
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
-
-        return $this;
-    }
 
     /**
-     * Get username
-     *
-     * @return string
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
      */
-    public function getUsername()
+    public function timestamps()
     {
-        return $this->username;
+        if (is_null($this->createdAt)) {
+            $this->createdAt = new \DateTime();
+        }
+
+        $this->updatedAt = new \DateTime();
     }
 
     /**
@@ -144,75 +112,27 @@ class User
     }
 
     /**
-     * Set surname
+     * Set firstname
      *
-     * @param string $surname
+     * @param string $firstname
      *
      * @return User
      */
-    public function setSurname($surname)
+    public function setFirstname($firstname)
     {
-        $this->surname = $surname;
+        $this->firstname = $firstname;
 
         return $this;
     }
 
     /**
-     * Get surname
+     * Get firstname
      *
      * @return string
      */
-    public function getSurname()
+    public function getFirstname()
     {
-        return $this->surname;
-    }
-
-    /**
-     * Set email
-     *
-     * @param string $email
-     *
-     * @return User
-     */
-    public function setEmail($email)
-    {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    /**
-     * Get email
-     *
-     * @return string
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return User
-     */
-    public function setPassword($password)
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Get password
-     *
-     * @return string
-     */
-    public function getPassword()
-    {
-        return $this->password;
+        return $this->firstname;
     }
 
     /**
@@ -240,27 +160,27 @@ class User
     }
 
     /**
-     * Set creationAt
+     * Set createdAt
      *
-     * @param \DateTime $creationAt
+     * @param \DateTime $createdAt
      *
      * @return User
      */
-    public function setCreationAt($creationAt)
+    public function setCreatedAt($createdAt)
     {
-        $this->creationAt = $creationAt;
+        $this->createdAt = $createdAt;
 
         return $this;
     }
 
     /**
-     * Get creationAt
+     * Get createdAt
      *
      * @return \DateTime
      */
-    public function getCreationAt()
+    public function getCreatedAt()
     {
-        return $this->creationAt;
+        return $this->createdAt;
     }
 
     /**

@@ -35,5 +35,5 @@
 * Liste
     * id
     * nom (exemple "liste php")
-    * dafe de création / update
+    * date de création / update
 * Message privé ? (voir pour étendre Message)

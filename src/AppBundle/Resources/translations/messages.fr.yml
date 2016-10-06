@@ -1,0 +1,12 @@
+message:
+  list:
+    title: "Liste des messages"
+    content: "Contenu"
+    created_at: "Date de création"
+    updated_at: "Date de mise à jour"
+    id: "Id"
+    user: "Utilisateur"
+    actions: "Actions"
+    create_new_message: "Créer un nouveau message"
+    show: "Voir"
+    edit: "Éditer"

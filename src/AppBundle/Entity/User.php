@@ -6,7 +6,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * User
+ * User.
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
@@ -73,7 +73,6 @@ class User extends BaseUser
         return $this->id;
     }
 
-
     /**
      * @ORM\PrePersist
      * @ORM\PreUpdate
@@ -88,7 +87,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -102,7 +101,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -112,7 +111,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set firstname
+     * Set firstname.
      *
      * @param string $firstname
      *
@@ -126,7 +125,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get firstname
+     * Get firstname.
      *
      * @return string
      */
@@ -136,7 +135,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set profilPicture
+     * Set profilPicture.
      *
      * @param string $profilPicture
      *
@@ -150,7 +149,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get profilPicture
+     * Get profilPicture.
      *
      * @return string
      */
@@ -160,7 +159,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *
@@ -174,7 +173,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -184,7 +183,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      *
@@ -198,7 +197,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -208,7 +207,7 @@ class User extends BaseUser
     }
 
     /**
-     * Set statut
+     * Set statut.
      *
      * @param array $statut
      *
@@ -222,7 +221,7 @@ class User extends BaseUser
     }
 
     /**
-     * Get statut
+     * Get statut.
      *
      * @return array
      */
@@ -231,4 +230,3 @@ class User extends BaseUser
         return $this->statut;
     }
 }
-

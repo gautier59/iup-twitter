@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Status
+ * Status.
  *
  * @ORM\Table(name="status")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\StatusRepository")
@@ -56,9 +56,8 @@ class Status
      */
     private $updatedAt;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -68,9 +67,9 @@ class Status
     }
 
     /**
-     * Set userId
+     * Set userId.
      *
-     * @param integer $userId
+     * @param int $userId
      *
      * @return Status
      */
@@ -82,7 +81,7 @@ class Status
     }
 
     /**
-     * Get userId
+     * Get userId.
      *
      * @return int
      */
@@ -92,9 +91,9 @@ class Status
     }
 
     /**
-     * Set messageId
+     * Set messageId.
      *
-     * @param integer $messageId
+     * @param int $messageId
      *
      * @return Status
      */
@@ -106,7 +105,7 @@ class Status
     }
 
     /**
-     * Get messageId
+     * Get messageId.
      *
      * @return int
      */
@@ -116,7 +115,7 @@ class Status
     }
 
     /**
-     * Set type
+     * Set type.
      *
      * @param string $type
      *
@@ -130,7 +129,7 @@ class Status
     }
 
     /**
-     * Get type
+     * Get type.
      *
      * @return string
      */
@@ -140,7 +139,7 @@ class Status
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *
@@ -154,7 +153,7 @@ class Status
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -164,7 +163,7 @@ class Status
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      *
@@ -178,7 +177,7 @@ class Status
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -187,4 +186,3 @@ class Status
         return $this->updatedAt;
     }
 }
-

@@ -5,7 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * UserList
+ * UserList.
  *
  * @ORM\Table(name="userlist")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserListRepository")
@@ -42,9 +42,8 @@ class UserList
      */
     private $updatedAt;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -54,7 +53,7 @@ class UserList
     }
 
     /**
-     * Set name
+     * Set name.
      *
      * @param string $name
      *
@@ -68,7 +67,7 @@ class UserList
     }
 
     /**
-     * Get name
+     * Get name.
      *
      * @return string
      */
@@ -78,7 +77,7 @@ class UserList
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *
@@ -92,7 +91,7 @@ class UserList
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -102,7 +101,7 @@ class UserList
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      *
@@ -116,7 +115,7 @@ class UserList
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -125,4 +124,3 @@ class UserList
         return $this->updatedAt;
     }
 }
-

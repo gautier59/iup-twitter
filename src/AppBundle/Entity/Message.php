@@ -5,9 +5,10 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Message
+ * Message.
  *
  * @ORM\Table(name="message")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\MessageRepository")
  */
 class Message
@@ -31,27 +32,26 @@ class Message
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="created_at", type="datetime")
+     * @ORM\Column(name="created_at", type="datetime", nullable=true)
      */
     private $createdAt;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="updated_at", type="datetime")
+     * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
     private $updatedAt;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="user_id", type="integer")
+     * @ORM\Column(name="user_id", type="integer", nullable=true)
      */
     private $userId;
 
-
     /**
-     * Get id
+     * Get id.
      *
      * @return int
      */
@@ -61,7 +61,20 @@ class Message
     }
 
     /**
-     * Set content
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function timestamps()
+    {
+        if (is_null($this->createdAt)) {
+            $this->createdAt = new \DateTime();
+        }
+
+        $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * Set content.
      *
      * @param string $content
      *
@@ -75,7 +88,7 @@ class Message
     }
 
     /**
-     * Get content
+     * Get content.
      *
      * @return string
      */
@@ -85,7 +98,7 @@ class Message
     }
 
     /**
-     * Set createdAt
+     * Set createdAt.
      *
      * @param \DateTime $createdAt
      *
@@ -99,7 +112,7 @@ class Message
     }
 
     /**
-     * Get createdAt
+     * Get createdAt.
      *
      * @return \DateTime
      */
@@ -109,7 +122,7 @@ class Message
     }
 
     /**
-     * Set updatedAt
+     * Set updatedAt.
      *
      * @param \DateTime $updatedAt
      *
@@ -123,7 +136,7 @@ class Message
     }
 
     /**
-     * Get updatedAt
+     * Get updatedAt.
      *
      * @return \DateTime
      */
@@ -133,9 +146,9 @@ class Message
     }
 
     /**
-     * Set userId
+     * Set userId.
      *
-     * @param integer $userId
+     * @param int $userId
      *
      * @return Message
      */
@@ -147,7 +160,7 @@ class Message
     }
 
     /**
-     * Get userId
+     * Get userId.
      *
      * @return int
      */
@@ -156,4 +169,3 @@ class Message
         return $this->userId;
     }
 }
-

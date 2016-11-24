@@ -47,4 +47,25 @@ class DefaultController extends Controller
 
         return $this->redirect($this->generateUrl('homepage'));
     }
+
+    /**
+     * @param Status $status
+     *
+     * @Route("/unlike/{id}", requirements={"id" = "\d+"}, name="unlike")
+     */
+    public function unlikeAction(Status $status)
+    {
+        $user = $this->getUser();
+
+        // On vérifie qu'on est connecté et qu'on le droit de supprimer ce statut
+        if (null === $user || ($status->getUser() !== $user)) {
+            throw new AccessDeniedHttpException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($status);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('homepage'));
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -56,6 +57,7 @@ class Message
     public function __construct(User $user)
     {
         $this->user = $user;
+        $this->status = new ArrayCollection();
     }
 
     /**
@@ -159,5 +161,25 @@ class Message
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     *
+     * @return Message
+     */
+    public function setStatus($status)
+    {
+        $this->status[] = $status;
+
+        return $this;
     }
 }

@@ -75,7 +75,6 @@ class User extends BaseUser
      */
     private $messagesStatus;
 
-
     /**
      * @return int
      */

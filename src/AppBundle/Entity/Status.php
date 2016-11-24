@@ -53,7 +53,6 @@ class Status
      */
     private $user;
 
-
     public function __construct(Message $message, User $user)
     {
         $this->setUser($user);
@@ -76,6 +75,7 @@ class Status
     public function setMessage($message)
     {
         $this->message = $message;
+
         return $this;
     }
 
@@ -95,6 +95,7 @@ class Status
     public function setUser($user)
     {
         $this->user = $user;
+
         return $this;
     }
 

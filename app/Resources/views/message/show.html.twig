@@ -22,8 +22,8 @@
                 <td>{% if message.updatedAt %}{{ message.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
-                <th>Userid</th>
-                <td>{{ message.userId }}</td>
+                <th>User</th>
+                <td>{{ message.user.id }}</td>
             </tr>
         </tbody>
     </table>

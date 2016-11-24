@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Message;
+use AppBundle\Entity\Status;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +37,13 @@ class DefaultController extends Controller
         // Stocker dans la table status le fait que mon user a aimé le message
         $user = $this->getUser();
 
+        $status = new Status($message, $user);
+        $status->setType('like');
 
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($status);
+        $em->flush();
 
+        return $this->redirect($this->generateUrl('homepage'));
     }
 }

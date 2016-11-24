@@ -21,7 +21,7 @@
                 <td>{{ message.content }}</td>
                 <td>{% if message.createdAt %}{{ message.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if message.updatedAt %}{{ message.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ message.userId }}</td>
+                <td>{{ message.user.id }}</td>
                 <td>
                     <ul>
                         <li>

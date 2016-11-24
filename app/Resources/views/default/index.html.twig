@@ -9,7 +9,8 @@
             <ul>
             {% for message in messages %}
                 <li>{{ message.content }}</li>
-                <li class="tools"><a href="#">J'aime</a> - <a href="#">retweet</a></li>
+                <li>Posté par {{ message.user.username }} le {{ message.createdAt|date('d-m-Y H:i') }}</li>
+                <li class="tools"><a href="{{ path('like', {'id': message.id} ) }}">J'aime</a> - <a href="#">retweet</a></li>
             {% endfor %}
             </ul>
 

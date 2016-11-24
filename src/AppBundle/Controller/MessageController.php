@@ -40,7 +40,7 @@ class MessageController extends Controller
      */
     public function newAction(Request $request)
     {
-        $message = new Message();
+        $message = new Message($this->getUser());
         $form = $this->createForm('AppBundle\Form\MessageType', $message);
         $form->handleRequest($request);
 

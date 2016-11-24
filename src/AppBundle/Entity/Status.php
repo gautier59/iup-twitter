@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Status.
  *
  * @ORM\Table(name="status")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\StatusRepository")
  */
 class Status
@@ -20,20 +21,6 @@ class Status
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="user_id", type="integer")
-     */
-    private $userId;
-
-    /**
-     * @var int
-     *
-     * @ORM\Column(name="message_id", type="integer")
-     */
-    private $messageId;
 
     /**
      * @var string
@@ -66,6 +53,51 @@ class Status
      */
     private $user;
 
+
+    public function __construct(Message $message, User $user)
+    {
+        $this->setUser($user);
+        $this->setMessage($message);
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMessage()
+    {
+        return $this->message;
+    }
+
+    /**
+     * @param mixed $message
+     *
+     * @return Status
+     */
+    public function setMessage($message)
+    {
+        $this->message = $message;
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     *
+     * @return Status
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+        return $this;
+    }
+
     /**
      * Get id.
      *
@@ -74,54 +106,6 @@ class Status
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set userId.
-     *
-     * @param int $userId
-     *
-     * @return Status
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId.
-     *
-     * @return int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Set messageId.
-     *
-     * @param int $messageId
-     *
-     * @return Status
-     */
-    public function setMessageId($messageId)
-    {
-        $this->messageId = $messageId;
-
-        return $this;
-    }
-
-    /**
-     * Get messageId.
-     *
-     * @return int
-     */
-    public function getMessageId()
-    {
-        return $this->messageId;
     }
 
     /**
@@ -194,5 +178,18 @@ class Status
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function timestamps()
+    {
+        if (is_null($this->createdAt)) {
+            $this->createdAt = new \DateTime();
+        }
+
+        $this->updatedAt = new \DateTime();
     }
 }

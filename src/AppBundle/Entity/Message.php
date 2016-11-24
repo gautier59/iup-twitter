@@ -43,12 +43,20 @@ class Message
      */
     private $updatedAt;
 
+
     /**
-     * @var int
-     *
-     * @ORM\Column(name="user_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
      */
-    private $userId;
+    private $user;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Status", mappedBy="message", cascade={"persist"})
+     */
+    private $status;
+
+    public function __construct(User $user) {
+        $this->user = $user;
+    }
 
     /**
      * Get id.
@@ -146,26 +154,10 @@ class Message
     }
 
     /**
-     * Set userId.
-     *
-     * @param int $userId
-     *
-     * @return Message
+     * @return mixed
      */
-    public function setUserId($userId)
+    public function getUser()
     {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId.
-     *
-     * @return int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
+        return $this->user;
     }
 }

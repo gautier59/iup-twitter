@@ -4,6 +4,14 @@
     <div id="wrapper">
         <div id="container">
 
+            <h2>Messages</h2>
+
+            <ul>
+            {% for message in messages %}
+                <li>{{ message.content }}</li>
+                <li class="tools"><a href="#">J'aime</a> - <a href="#">retweet</a></li>
+            {% endfor %}
+            </ul>
 
         </div>
     </div>

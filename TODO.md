@@ -2,11 +2,11 @@
 
 ## Fonctionnalités 
 
-* authentification / création de compte
+* X authentification / création de compte
 * s'abonner aux autres utilisateurs
-* créer des messages 
+* X créer des messages 
     * ajouter des photos / vidéos
-* visualiser les messages 
+* X visualiser les messages 
 * "j'aime", "retweet"
 * créer des listes 
 

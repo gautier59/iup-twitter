@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Message;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,9 +14,29 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
+         // Récupérer la liste des messages en base
+        $messages = $this->getDoctrine()
+            ->getRepository('AppBundle:Message')
+            ->findByOrderedByDate();
+
+        //Les envoyer à la vue
+
         return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+            'messages' => $messages,
         ]);
+    }
+
+    /**
+     * @param Message $message
+     *
+     * @Route("/like/{id}", requirements={"id" = "\d+"}, name="like")
+     */
+    public function likeAction(Message $message)
+    {
+        // Stocker dans la table status le fait que mon user a aimé le message
+        $user = $this->getUser();
+
+
+
     }
 }

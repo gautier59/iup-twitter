@@ -10,4 +10,9 @@ namespace AppBundle\Repository;
  */
 class MessageRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByOrderedByDate()
+    {
+        return $this->createQueryBuilder('m')
+            ->getQuery()->getResult();
+    }
 }

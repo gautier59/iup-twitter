@@ -57,6 +57,16 @@ class Status
     private $updatedAt;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Message", inversedBy="status", cascade={"persist"})
+     */
+    private $message;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="messagesStatus", cascade={"persist"})
+     */
+    private $user;
+
+    /**
      * Get id.
      *
      * @return int

@@ -66,6 +66,17 @@ class User extends BaseUser
     private $statut;
 
     /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="user", cascade={"remove"})
+     */
+    private $messages;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Status", mappedBy="user", cascade={"persist"})
+     */
+    private $messagesStatus;
+
+
+    /**
      * @return int
      */
     public function getId()

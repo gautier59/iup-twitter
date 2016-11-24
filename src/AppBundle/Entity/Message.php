@@ -49,7 +49,7 @@ class Message
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Status", mappedBy="message", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Status", mappedBy="message", cascade={"persist"})
      */
     private $status;
 

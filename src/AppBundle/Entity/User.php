@@ -71,7 +71,7 @@ class User extends BaseUser
     private $messages;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Status", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Status", mappedBy="user", cascade={"persist"})
      */
     private $messagesStatus;
 

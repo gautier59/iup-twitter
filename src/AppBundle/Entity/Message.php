@@ -43,7 +43,6 @@ class Message
      */
     private $updatedAt;
 
-
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="messages")
      */

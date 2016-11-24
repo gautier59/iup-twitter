@@ -57,12 +57,12 @@ class Status
     private $updatedAt;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Message", inversedBy="status", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Message", inversedBy="status")
      */
     private $message;
 
     /**
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="messagesStatus", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="messagesStatus")
      */
     private $user;
 

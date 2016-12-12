@@ -38,6 +38,10 @@ class DefaultController extends Controller
             throw new AccessDeniedHttpException();
         }
 
+        // Vérifier qu'on n'a pas déjà liker le message
+        // user getMessagesStatus
+        // in array (messageId)
+
         $status = new Status($message, $user);
         $status->setType('like');
 

@@ -1,14 +1,15 @@
 # Projet Twitter
 
-## Fonctionnalités 
+## Fonctionnalités
 
 * X authentification / création de compte
 * s'abonner aux autres utilisateurs
-* X créer des messages 
+* X créer des messages
     * ajouter des photos / vidéos
-* X visualiser les messages 
-* "j'aime", "retweet"
-* créer des listes 
+* X visualiser les messages
+* X j'aime"
+* "retweet"
+* créer des listes
 
 ## Entités
 
@@ -24,14 +25,14 @@
 * Message
     * id
     * user id
-    * corps du message 
+    * corps du message
     * date de création / update
-* Statut de message 
-    * id 
-    * user id 
-    * message id 
+* Statut de message
+    * id
+    * user id
+    * message id
     * statut
-    * date de création / update    
+    * date de création / update
 * Liste
     * id
     * nom (exemple "liste php")

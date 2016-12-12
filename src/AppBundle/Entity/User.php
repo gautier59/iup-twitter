@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -74,6 +75,11 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Status", mappedBy="user", cascade={"persist"})
      */
     private $messagesStatus;
+
+    public function __construct()
+    {
+        $this->messagesStatus = new ArrayCollection();
+    }
 
     /**
      * @return int
@@ -226,6 +232,24 @@ class User extends BaseUser
     public function setStatut($statut)
     {
         $this->statut = $statut;
+
+        return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMessagesStatus()
+    {
+        return $this->messagesStatus;
+    }
+
+    /**
+     * @param mixed $messagesStatus
+     */
+    public function setMessagesStatus($messagesStatus)
+    {
+        $this->messagesStatus[] = $messagesStatus;
 
         return $this;
     }

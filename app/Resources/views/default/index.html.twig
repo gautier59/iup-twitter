@@ -18,6 +18,11 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">Accueil <span class="sr-only">(current)</span></a></li>
+                    {% if app.user is null %}
+                        <li><a href="{{ path('fos_user_security_login') }}">Login</a></li>
+                    {% else %}
+                        <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                    {% endif %}
                     <li><a href="">Messages</a></li>
                 </ul>
 

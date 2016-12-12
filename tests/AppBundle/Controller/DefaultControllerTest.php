@@ -2,17 +2,27 @@
 
 namespace Tests\AppBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Tests\AppBundle\AppTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class DefaultControllerTest extends AppTestCase
 {
-    public function testIndex()
+    public function testIndexLogout()
     {
-        $client = static::createClient();
-
+    	$client = $this->getClient();
         $crawler = $client->request('GET', '/');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Welcome to Symfony', $crawler->filter('#container h1')->text());
+        $this->assertContains('Login', $client->getResponse()->getContent());
+    }
+
+    public function testIndexLogged()
+    {
+    	$this->logInAs('nicolas');
+
+		$client = $this->getClient();
+        $crawler = $client->request('GET', '/');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertContains('Logout', $client->getResponse()->getContent());
     }
 }

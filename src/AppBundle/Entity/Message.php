@@ -54,10 +54,16 @@ class Message
      */
     private $status;
 
-    public function __construct(User $user)
+    /**
+     * @ORM\ManyToOne(targetEntity="Message", inversedBy="parent")
+     */
+    private $parent;
+
+    public function __construct(User $user, Message $parent = null)
     {
         $this->user = $user;
         $this->status = new ArrayCollection();
+        $this->parent = $parent;
     }
 
     /**
@@ -181,5 +187,13 @@ class Message
         $this->status[] = $status;
 
         return $this;
+    }
+
+    /**
+     * @return Message
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

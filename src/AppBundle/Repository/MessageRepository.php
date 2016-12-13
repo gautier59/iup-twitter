@@ -13,6 +13,7 @@ class MessageRepository extends \Doctrine\ORM\EntityRepository
     public function findByOrderedByDate()
     {
         return $this->createQueryBuilder('m')
+            ->orderBy('m.createdAt', 'desc')
             ->getQuery()->getResult();
     }
 }

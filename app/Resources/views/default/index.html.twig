@@ -41,7 +41,11 @@
                 <legend>Accueil</legend>
                 {% for message in messages %}
                     <div class="panel panel-default">
-                        <div class="panel-heading"> {{ message.user.username }} :  </div>
+                        <div class="panel-heading"> {{ message.user.username }}
+                            {% if message.parent is not null %}
+                                a retweeté
+                            {% endif %}
+                        </div>
                         <div class="panel-body">
                             {{ message.content }}
 

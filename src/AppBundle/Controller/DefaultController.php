@@ -86,11 +86,38 @@ class DefaultController extends Controller
             throw new AccessDeniedHttpException();
         }
 
-        // On va dupliquer le msg
+        $em = $this->getDoctrine()->getManager();
+
+        // Vérifier qu'on n'essaie pas de retweeter un enfant
+        // Si c'est le cas, on RT le parent
+        if (null !== $message->getParent()) {
+            $retweet = new Message($user, $message->getParent());
+            $retweet->setContent($message->getParent()->getContent());
+
+            $em->persist($retweet);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        // Si on RT un message qu'on a déjà RT par le passé, ça supprime le RT
+        $exists = $this
+            ->getDoctrine()
+            ->getRepository('AppBundle:Message')
+            ->findByParentAndUser($user->getId(), $message->getId())
+        ;
+
+        if (count($exists) > 0) {
+            $em->remove($exists[0]);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        // On RT
         $retweet = new Message($user, $message);
         $retweet->setContent($message->getContent());
 
-        $em = $this->getDoctrine()->getManager();
         $em->persist($retweet);
         $em->flush();
 

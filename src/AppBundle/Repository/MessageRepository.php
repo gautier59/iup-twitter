@@ -16,4 +16,12 @@ class MessageRepository extends \Doctrine\ORM\EntityRepository
             ->orderBy('m.createdAt', 'desc')
             ->getQuery()->getResult();
     }
+
+    public function findByParentAndUser($userId, $parentId)
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.user = :userId')->setParameter('userId', $userId)
+            ->andWhere('m.parent = :parentId')->setParameter('parentId', $parentId)
+            ->getQuery()->getResult();
+    }
 }

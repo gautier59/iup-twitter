@@ -70,7 +70,8 @@
                                         </a>
                              {% endif %}
 
-                            {% if message.parent is null %}
+                            {% if (message.parent is not null and message.parent.user != app.user)
+                            or (message.parent is null) %}
                             <i class="fa fa-twitter" aria-hidden="true"></i>
                             <a href="{{ path('retweet' , {'id' : message.id }) }}"> Retweet</a>
                             {% endif %}

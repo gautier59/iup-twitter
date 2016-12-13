@@ -50,19 +50,26 @@ class Message
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity="Status", mappedBy="message", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Status", mappedBy="message", cascade={"remove"})
      */
     private $status;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Message", inversedBy="parent")
+     * @ORM\ManyToOne(targetEntity="Message", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="parent")
+     */
+    private $children;
 
     public function __construct(User $user, Message $parent = null)
     {
         $this->user = $user;
         $this->status = new ArrayCollection();
+        $this->children = new ArrayCollection();
         $this->parent = $parent;
     }
 

@@ -38,7 +38,7 @@ class DefaultController extends Controller
             throw new AccessDeniedHttpException();
         }
 
-        // Vérifier qu'on n'a pas déjà liker le message
+        // @TODO Vérifier qu'on n'a pas déjà liker le message
         // user getMessagesStatus
         // in array (messageId)
 
@@ -68,6 +68,30 @@ class DefaultController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $em->remove($status);
+        $em->flush();
+
+        return $this->redirect($this->generateUrl('homepage'));
+    }
+
+    /**
+     * @param Message $message
+     *
+     * @Route("/retweet/{id}", requirements={"id" = "\d+"}, name="retweet")
+     */
+    public function retweetAction(Message $message)
+    {
+        $user = $this->getUser();
+
+        if (null === $user) {
+            throw new AccessDeniedHttpException();
+        }
+
+        // On va dupliquer le msg
+        $retweet = new Message($user, $message);
+        $retweet->setContent($message->getContent());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($retweet);
         $em->flush();
 
         return $this->redirect($this->generateUrl('homepage'));

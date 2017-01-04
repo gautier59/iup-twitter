@@ -67,7 +67,7 @@ class Message
     private $children;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      *
      * @Assert\NotBlank(message="Please, upload the picture.")
      * @Assert\File(mimeTypes={ "image/jpeg", "image/png", "image/gif" })

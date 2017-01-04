@@ -93,6 +93,7 @@ class DefaultController extends Controller
         if (null !== $message->getParent()) {
             $retweet = new Message($user, $message->getParent());
             $retweet->setContent($message->getParent()->getContent());
+            $retweet->setPicture($message->getParent()->getPicture());
 
             $em->persist($retweet);
             $em->flush();
@@ -117,6 +118,7 @@ class DefaultController extends Controller
         // On RT
         $retweet = new Message($user, $message);
         $retweet->setContent($message->getContent());
+        $retweet->setPicture($message->getPicture());
 
         $em->persist($retweet);
         $em->flush();

@@ -8,8 +8,12 @@
     * ajouter des photos / vidéos
 * X visualiser les messages
 * X j'aime"
-* "retweet"
+* X "retweet"
 * créer des listes
+* moteur de recherche
+* ajout d'images
+* page profil
+* DM
 
 ## Entités
 

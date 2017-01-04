@@ -24,4 +24,11 @@ class MessageRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere('m.parent = :parentId')->setParameter('parentId', $parentId)
             ->getQuery()->getResult();
     }
+
+    public function findBySearchTerm($term)
+    {
+        return $this->createQueryBuilder('m')
+            ->where('m.content LIKE :content')->setParameter('content', '%'.$term.'%')
+            ->getQuery()->getResult();
+    }
 }

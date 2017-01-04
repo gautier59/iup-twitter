@@ -22,6 +22,13 @@
                 <td>{% if message.updatedAt %}{{ message.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
             </tr>
             <tr>
+                <th>Picture</th>
+                <td>{% if message.picture is not empty %}
+            <img src="{{ asset('uploads/pictures/' ~ message.picture) }}" style="max-width: 256px;" />
+            {% endif %}</td>
+            </tr>
+
+            <tr>
                 <th>User</th>
                 <td>{{ message.user.id }}</td>
             </tr>

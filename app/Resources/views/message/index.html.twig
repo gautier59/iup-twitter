@@ -11,6 +11,7 @@
                 <th>{{ 'message.list.created_at'|trans }}</th>
                 <th>{{ 'message.list.updated_at'|trans }}</th>
                 <th>{{ 'message.list.user'|trans }}</th>
+                <th>{{ 'message.list.picture'|trans }}</th>
                 <th>{{ 'message.list.actions'|trans }}</th>
             </tr>
         </thead>
@@ -22,6 +23,9 @@
                 <td>{% if message.createdAt %}{{ message.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if message.updatedAt %}{{ message.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ message.user.id }}</td>
+                <td>{% if message.picture is not empty %}
+            <img src="{{ asset('uploads/pictures/' ~ message.picture) }}" style="max-width: 64px;" />
+            {% endif %}</td>
                 <td>
                     <ul>
                         <li>

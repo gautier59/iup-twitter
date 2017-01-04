@@ -5,6 +5,9 @@
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
+            {% if message.picture is not empty %}
+            <img src="{{ asset('uploads/pictures/' ~ message.picture) }}" style="max-width: 256px;" />
+            {% endif %}<br />
         <input type="submit" value="Edit" />
     {{ form_end(edit_form) }}
 

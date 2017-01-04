@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use AppBundle\Entity\Message;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +18,10 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('content')
-            ->add('picture', FileType::class, array('label' => 'Picture (PNG, JPG, GIF)'))
+            ->add('picture', FileType::class, array(
+                'label' => 'Picture (PNG, JPG, GIF)',
+                'data_class' => null,
+                ))
         ;
     }
 
@@ -27,7 +31,7 @@ class MessageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Message',
+            'data_class' => Message::class,
         ));
     }
 }

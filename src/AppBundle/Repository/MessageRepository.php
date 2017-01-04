@@ -25,10 +25,21 @@ class MessageRepository extends \Doctrine\ORM\EntityRepository
             ->getQuery()->getResult();
     }
 
-    public function findBySearchTerm($term)
+    /**
+     * @param string $terms
+     *
+     * @return Message
+     */
+    public function findBySearchTermsAndByUser($terms, $user)
     {
-        return $this->createQueryBuilder('m')
-            ->where('m.content LIKE :content')->setParameter('content', '%'.$term.'%')
-            ->getQuery()->getResult();
+        $qb = $this->createQueryBuilder('m')
+            ->where('m.content LIKE :content')->setParameter('content', '%'.$terms.'%');
+
+        // On filtre sur un user particulier
+        if ([] != $user) {
+            $qb->andWhere('m.user = :user')->setParameter('user', $user[0]);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }

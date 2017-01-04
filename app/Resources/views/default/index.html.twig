@@ -49,6 +49,10 @@
                         <div class="panel-body">
                             {{ message.content }}
 
+                            {% if message.picture is not empty %}
+                            <img src="{{ asset('uploads/pictures/' ~ message.picture) }}" style="max-width: 256px;" />
+                            {% endif %}
+
                             {% set statusId = 0 %}
                             {% for status in message.status %}
                                 {% if status.user == app.user %}

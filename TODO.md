@@ -10,10 +10,18 @@
 * X j'aime"
 * X "retweet"
 * créer des listes
-* moteur de recherche
-* ajout d'images
+X * moteur de recherche
+X * ajout d'images
 * page profil
 * DM
+
+## Recherche
+
+"test"
+"test from:user" -> "test"
+"test blabla from:user" -> "test blabla"
+"test from:user blabla" -> "test blabla"
+"from:user test blabla" -> "test blabla"
 
 ## Entités
 

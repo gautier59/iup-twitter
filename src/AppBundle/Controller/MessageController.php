@@ -45,6 +45,19 @@ class MessageController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var Symfony\Component\HttpFoundation\File\UploadedFile $file */
+            $file = $message->getPicture();
+
+            $fileName = md5(uniqid()).'.'.$file->guessExtension();
+
+            // Move the file to the directory where brochures are stored
+            $file->move(
+                $this->getParameter('pictures_directory'),
+                $fileName
+            );
+
+            $message->setPicture($fileName);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($message);
             $em->flush();

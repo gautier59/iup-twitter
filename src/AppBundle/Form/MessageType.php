@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 
 class MessageType extends AbstractType
 {
@@ -16,6 +17,7 @@ class MessageType extends AbstractType
     {
         $builder
             ->add('content')
+            ->add('picture', FileType::class, array('label' => 'Picture (PNG, JPG, GIF)'))
         ;
     }
 

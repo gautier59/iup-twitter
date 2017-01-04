@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Message.
@@ -64,6 +65,14 @@ class Message
      * @ORM\OneToMany(targetEntity="Message", mappedBy="parent")
      */
     private $children;
+
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Please, upload the picture.")
+     * @Assert\File(mimeTypes={ "image/jpeg", "image/png", "image/gif" })
+     */
+    private $picture;
 
     public function __construct(User $user, Message $parent = null)
     {
@@ -202,5 +211,17 @@ class Message
     public function getParent()
     {
         return $this->parent;
+    }
+
+    public function getPicture()
+    {
+        return $this->picture;
+    }
+
+    public function setPicture($picture)
+    {
+        $this->picture = $picture;
+
+        return $this;
     }
 }

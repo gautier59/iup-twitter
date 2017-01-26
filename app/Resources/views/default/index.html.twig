@@ -37,9 +37,14 @@
     </nav>
     <div id="wrapper">
         <div id="container">
+            {%  if user is not null %}
+                {{ render(controller('AppBundle:Message:new')) }}
+            {% endif %}
             <fieldset>
-                <legend>Accueil - {{ messages|length }} message(s)</legend>
-                {% for message in messages %}
+                <legend>Accueil - {{ messages|length }} message(s)
+                </legend>
+
+                {% for message in pagination %}
                     <div class="panel panel-default">
                         <div class="panel-heading"> <a href="{{ path('user_message', {'username': message.user.username }) }}">{{ message.user.username }}</a>
                             {% if message.parent is not null %}
@@ -54,6 +59,9 @@
                                     <video width="320" height="180" controls="controls">
                                         <source src="{{ asset('uploads/pictures/' ~ message.picture) }}" type="video/mp4" />
                                     </video>
+                                    {%  elseif message.picture|ext == 'pdf' %}
+                                        <span class="glyphicon glyphicon-folder-open"></span>
+                                            <a href="{{ asset('uploads/pictures/' ~ message.picture) }}" target="_blank">{{ 'message.list.pdf'|trans }}</a>
                                 {% else %}
                                     <img src="{{ asset('uploads/pictures/' ~ message.picture) }}" style="max-width: 256px;" />
                                 {% endif %}
@@ -83,20 +91,51 @@
                             {% if (message.parent is not null and message.parent.user != app.user)
                             or (message.parent is null) %}
                             <i class="fa fa-twitter" aria-hidden="true"></i>
-                            <a href="{{ path('retweet' , {'id' : message.id }) }}"> Retweet</a>
+                            <a href="{{ path('retweet' , {'id' : message.id }) }}" id="tweet"> Retweet</a>
+                                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>  <a href=
+                                   "mailto:quiTuVeux@gmail.com?subject=Contenu du tweet&body={{ message.content }}">
+                                   Mail</a>
+                                <span class=" glyphicon glyphicon-zoom-in" aria-hidden="true"></span>
+                                <a href="{{ path('monTweet' , {'id' : message.id} ) }}" >Consulter le tweet</a>
                             {% endif %}
 
                         </div>
                     </div>
+                    <table>
+
+                    </table>
                 {% else %}
                     Aucun message
                 {% endfor %}
+                <div class="navigation">
+
+                    {{ knp_pagination_render(pagination) }}
+                </div>
+
 
             </fieldset>
 
-
         </div>
     </div>
+
+
+    <div class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                    <p>One fine body&hellip;</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 {% endblock %}
 
 {% block stylesheets %}
@@ -128,9 +167,12 @@
     </style>
 {% endblock %}
 
+
+
 {% block javascripts %}
+    <script type="application/javascript">
 
-
+    </script>
 {% endblock %}
 
 

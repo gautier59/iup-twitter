@@ -1,4 +1,5 @@
 message:
+  pieceJointe: "Pièce Jointe"
   list:
     title: "Liste des messages"
     content: "Contenu"
@@ -10,3 +11,6 @@ message:
     create_new_message: "Créer un nouveau message"
     show: "Voir"
     edit: "Éditer"
+    pdf : "Consulter PDF"
+  tweet :
+    title: "Aperçu du tweet"

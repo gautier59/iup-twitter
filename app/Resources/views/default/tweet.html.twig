@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="content">
+        <fieldset>
+            <legend>{{ 'message.tweet.title'|trans }}</legend>
+            {% for mess in message %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                   {{  mess.user.username }}
+                </div>
+                <div class="panel-body">
+                    {{ mess.content }}
+                </div>
+                <div class="panel-footer">
+                    Crée le : {{ mess.createdAt|date('d-m-Y') }}
+                   <span class="glyphicon glyphicon-paperclip"></span>
+                        <a href="{{ asset('uploads/pictures/' ~ mess.picture) }}" style="max-width: 256px;" >{{ 'message.pieceJointe'|trans }}</a>
+                </div>
+            </div>
+
+
+            {% endfor %}
+
+        </fieldset>
+        <button class="btn btn-danger">Retour</button>
+    </div>
+{% endblock %}
+
+
+{% block stylesheets %}
+    <style>
+        #content{
+            margin: auto;
+            width:1080px;
+        }
+    </style>
+{% endblock %}

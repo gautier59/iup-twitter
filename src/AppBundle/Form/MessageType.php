@@ -3,7 +3,9 @@
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Message;
+use Symfony\Component\DomCrawler\Field\TextareaFormField;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -17,11 +19,12 @@ class MessageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('content')
+            ->add('content' , TextareaType::class)
             ->add('picture', FileType::class, array(
-                'label' => 'Picture (PNG, JPG, GIF, MP4)',
+                'label' => 'Fichier (PNG, JPG, GIF, MP4 , PDF)',
                 'data_class' => null,
                 ))
+
         ;
     }
 

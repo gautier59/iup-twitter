@@ -8,6 +8,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+
 
 class DefaultController extends Controller
 {
@@ -16,13 +18,26 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $paginator = $this->get('knp_paginator');
+        $user = $this->getUser();
         $messages = $this->getDoctrine()
             ->getRepository('AppBundle:Message')
             ->findByOrderedByDate();
+        $pagination = $paginator->paginate(
+            $messages,
+            $request->query->getInt('page', 1),
+            3
+        );
+
+
 
         return $this->render('default/index.html.twig', [
             'messages' => $messages,
+            'pagination' => $pagination,
+            'user' => $user
         ]);
+
+
     }
 
     /**
@@ -81,6 +96,19 @@ class DefaultController extends Controller
     public function retweetAction(Message $message)
     {
         $user = $this->getUser();
+        /*    $mail = \Swift_Message::newInstance()
+                   ->setSubject("Votre tweet à été retweeté")
+                   ->setFrom("wallaert.kevin@hotmail.fr")
+                   ->setTo("aRecup")
+                   ->setBody(
+                       $this->renderView(
+                           'Emails/registration.html.twig',
+                           array('name' => $message->getContent())
+                       ),
+                       'text/html'
+                   );*/
+
+        $content = $message->getContent();
 
         if (null === $user) {
             throw new AccessDeniedHttpException();
@@ -105,8 +133,7 @@ class DefaultController extends Controller
         $exists = $this
             ->getDoctrine()
             ->getRepository('AppBundle:Message')
-            ->findByParentAndUser($user->getId(), $message->getId())
-        ;
+            ->findByParentAndUser($user->getId(), $message->getId());
 
         if (count($exists) > 0) {
             $em->remove($exists[0]);
@@ -123,6 +150,23 @@ class DefaultController extends Controller
         $em->persist($retweet);
         $em->flush();
 
+        // $this->get('mailer')->send($mail);
         return $this->redirect($this->generateUrl('homepage'));
+    }
+
+    /**
+     * @Route("/tweet/{id}" , requirements = {"id" = "\d+"}, name="monTweet")
+     */
+    public function seeTweet(Message $message)
+    {
+        $idMessage = $message->getId();
+        $data = $this->getDoctrine()
+            ->getRepository('AppBundle:Message')
+            ->getMessageById($idMessage);
+
+        //dump($data);die;
+
+        return $this->render('default/tweet.html.twig', array('message' => $data));
+
     }
 }

@@ -63,4 +63,10 @@ class MessageRepository extends \Doctrine\ORM\EntityRepository
             ->andWhere('m.user = :user')->setParameter('user', $user)
             ->getQuery()->getResult();
     }
+
+    public function getMessageById($id){
+        return $this->createQueryBuilder('m')
+            ->where('m.id = :idMessage')->setParameter('idMessage' , $id)
+            ->getQuery()->getResult();
+    }
 }

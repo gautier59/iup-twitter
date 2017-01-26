@@ -13,7 +13,7 @@ class AppExtension extends \Twig_Extension
 
     public function ext($filepath)
     {
-    	return strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
+        return strtolower(pathinfo($filepath, PATHINFO_EXTENSION));
     }
 
     public function getName()

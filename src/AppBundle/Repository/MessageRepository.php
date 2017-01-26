@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\User;
+
 /**
  * MessageRepository.
  *
@@ -10,10 +12,15 @@ namespace AppBundle\Repository;
  */
 class MessageRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function findByOrderedByDate()
+    protected function getMessagesOrderedByDate()
     {
         return $this->createQueryBuilder('m')
-            ->orderBy('m.createdAt', 'desc')
+            ->orderBy('m.createdAt', 'desc');
+    }
+
+    public function findByOrderedByDate()
+    {
+        return $this->getMessagesOrderedByDate()
             ->getQuery()->getResult();
     }
 
@@ -41,5 +48,19 @@ class MessageRepository extends \Doctrine\ORM\EntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * Get the messages filtered by user.
+     *
+     * @param User $user user
+     *
+     * @return Message
+     */
+    public function findByOrderedByDateAndByUser(User $user)
+    {
+        return $this->getMessagesOrderedByDate()
+            ->andWhere('m.user = :user')->setParameter('user', $user)
+            ->getQuery()->getResult();
     }
 }

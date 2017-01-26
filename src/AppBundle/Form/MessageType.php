@@ -19,7 +19,7 @@ class MessageType extends AbstractType
         $builder
             ->add('content')
             ->add('picture', FileType::class, array(
-                'label' => 'Picture (PNG, JPG, GIF)',
+                'label' => 'Picture (PNG, JPG, GIF, MP4)',
                 'data_class' => null,
                 ))
         ;

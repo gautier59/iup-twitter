@@ -5,13 +5,13 @@
 * X authentification / création de compte
 * s'abonner aux autres utilisateurs
 * X créer des messages
-    * ajouter des photos / vidéos
+* X ajouter des photos / vidéos
 * X visualiser les messages
 * X j'aime"
 * X "retweet"
 * créer des listes
-X * moteur de recherche
-X * ajout d'images
+* X moteur de recherche
+* X ajout d'images
 * page profil
 * DM
 
